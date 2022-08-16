@@ -32,27 +32,6 @@ def padRightDownCorner(img, stride, padValue):
     img_padded = np.concatenate((img_padded, pad_right), axis=1)
 
     return img_padded, pad
-#
-#
-# from collections import OrderedDict
-#
-#
-# def convert2mge(torch_state, meg_state):
-#     new_state = OrderedDict()
-#     for key, value in torch_state.items():
-#         if len(value.size()) < 1:
-#             continue
-#         meg_value = meg_state[key]
-#         new_value = value.detach().cpu().numpy()
-#         value_np = value.detach().cpu().numpy()
-#         if meg_value.shape != value_np.shape:
-#             if meg_value.ndim == 4 and value_np.ndim == 1 and "bias" in key:
-#                 new_value = np.reshape(value_np, meg_value.shape)
-#             elif meg_value.ndim == 5 and value_np.ndim == 4 and "weight" in key:
-#                 splited = [np.expand_dims(s, axis=0) for s in np.split(value_np, meg_value.shape[0])]
-#                 new_value = np.concatenate(splited, axis=0)
-#         new_state[key] = new_value
-#     return new_state
 
 
 # transfer caffe model to pytorch which will match the layer name
@@ -63,21 +42,7 @@ def transfer(model, model_weights):
 
     return transfered_model_weights
 
-#
-# # transfer caffe model to pytorch to megengine which will match the layer name
-# def transfer_caffe2pt2meg(model_pt, model_mge, model_weights):
-#     transfered_model_weights = {}
-#
-#     for weights_name in model_pt.state_dict().keys():
-#         transfered_model_weights[weights_name] = model_weights['.'.join(weights_name.split('.')[1:])]
-#     transfered_model_weights = convert2mge(transfered_model_weights, model_mge.state_dict())
-#
-#     import megengine as mge
-#     path = "body_pose_model.mge"  # 我们约定用".mge"拓展名表示 MegEngine 模型文件
-#     mge.save(transfered_model_weights, path)
-#
-#     return transfered_model_weights
-#
+
 
 # draw the body keypoint and lims
 def draw_bodypose(canvas, candidate, subset):
