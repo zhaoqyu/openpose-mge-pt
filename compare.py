@@ -23,10 +23,37 @@ for i, image_name in enumerate(os.listdir(image_folder)):
     np.testing.assert_allclose(subset_pt, subset_mge, rtol=1e-3)
     print('The {}th image named {} passed'.format(i, image_name))
 
-print('Pass')
+print('Counting inference time......')
 
-# Uncomment the block below to view the visualization results
-# Uncomment the block below to view the visualization results
+# time compare
+iterations = 50
+import time
+
+test_image = 'images/demo.jpg'
+oriImg = cv2.imread(test_image)
+
+# torch model inference time
+time_start = time.time()  # 记录开始时间
+for iter in range(iterations):
+    _, _ = body_estimation_pt(oriImg)
+
+time_end = time.time()  # 记录结束时间
+mean_time_pt = (time_end - time_start)/iterations
+print(" Torch model inference time: {:.6f}s, FPS: {} ".format(mean_time_pt, 1/mean_time_pt))
+
+
+
+# mge model inference time
+time_start = time.time()  # 记录开始时间
+for iter in range(iterations):
+    _, _ = body_estimation_mge(oriImg)
+
+time_end = time.time()  # 记录结束时间
+mean_time_mge = (time_end - time_start)/iterations
+print(" Torch model inference time: {:.6f}s, FPS: {} ".format(mean_time_mge, 1/mean_time_mge))
+
+
+
 # Uncomment the block below to view the visualization results
 '''
 test_image = 'images/demo.jpg'
