@@ -1,0 +1,9 @@
+hiddenlayer/
+.idea/
+.ipynb_checkpoints/
+__pycache__
+videos/
+*.pth
+*.mge
+*.caffemodel
+*.prototxt
