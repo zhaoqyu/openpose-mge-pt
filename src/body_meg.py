@@ -6,14 +6,17 @@ import matplotlib.pyplot as plt
 import megengine as mge
 from src import util
 from src.model_meg import bodypose_model
+from src.model_meg import openpose_model
 
 
 class Body(object):
     def __init__(self):
-        self.model = bodypose_model()
-        model_dict = mge.hub.load_serialized_obj_from_url(
-            'https://studio.brainpp.com/api/v1/activities/3/missions/82/files/a031f878-dce9-46c5-bf8f-8e0c4fe88481')
-        self.model.load_state_dict(model_dict)
+        # self.model = bodypose_model()
+        # model_dict = mge.hub.load_serialized_obj_from_url(
+        #     'https://studio.brainpp.com/api/v1/activities/3/missions/82/files/a031f878-dce9-46c5-bf8f-8e0c4fe88481')
+        # self.model.load_state_dict(model_dict)
+
+        self.model = openpose_model(pretrained=True)
         self.model.eval()
 
     def __call__(self, oriImg):
