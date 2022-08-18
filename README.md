@@ -25,7 +25,7 @@ Import from megengine.hub:
 ```python
 import megengine as mge
 
-model = mge.hub.load("zhaoqyu/openpose-mge-pt", "openpose_model", git_host='github.com', pretrained=True)
+model = mge.hub.load("zhaoqyu/openpose-mge-pt", "openpose_model", git_host='github.com', use_cache=False, pretrained=True)
 
 print(model)
 ```
