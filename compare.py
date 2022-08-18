@@ -50,7 +50,7 @@ for iter in range(iterations):
 
 time_end = time.time()  # 记录结束时间
 mean_time_mge = (time_end - time_start)/iterations
-print(" Torch model inference time: {:.6f}s, FPS: {} ".format(mean_time_mge, 1/mean_time_mge))
+print(" Megengine model inference time: {:.6f}s, FPS: {} ".format(mean_time_mge, 1/mean_time_mge))
 
 
 
