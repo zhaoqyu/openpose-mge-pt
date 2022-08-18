@@ -16,7 +16,9 @@ class Body(object):
         #     'https://studio.brainpp.com/api/v1/activities/3/missions/82/files/a031f878-dce9-46c5-bf8f-8e0c4fe88481')
         # self.model.load_state_dict(model_dict)
 
-        self.model = openpose_model(pretrained=True)
+        # self.model = openpose_model(pretrained=True)
+        self.model = mge.hub.load("zhaoqyu/openpose-mge-pt", "openpose_model", git_host='github.com', pretrained=True)
+
         self.model.eval()
 
     def __call__(self, oriImg):
